@@ -3,18 +3,21 @@ const puppeteer = require('puppeteer-core');
 // REEMPLAZA ESTE TOKEN POR EL TUYO CADA VEZ QUE VAYAS A ENCENDER EL HOST
 const TOKEN = "thr1.AAAAAGqhrV0xth9rMyQ5Aw.VPV0oBq8Sq0";
 
+const puppeteer = require('puppeteer');
+
 (async () => {
   const browser = await puppeteer.launch({
-    executablePath: '/usr/bin/google-chrome',
-    headless: true,
+    headless: 'new', // o true
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
-      '--ignore-certificate-errors',
-      '--use-gl=angle',
-      '--use-angle=gl-egl'
+      '--disable-dev-shm-usage',
+      '--single-process'
     ]
   });
+  
+  // resto de tu código de Haxball
+})();
   
   const page = await browser.newPage();
 
