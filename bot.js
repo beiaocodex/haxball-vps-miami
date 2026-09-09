@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer-core');
 
-const TOKEN = "thr1.AAAAAGqg8K1i-WTPiVcgeQ.-gUFQBsy2Eg";
+// REEMPLAZA ESTE TOKEN POR EL TUYO CADA VEZ QUE VAYAS A ENCENDER EL HOST
+const TOKEN = "thr1.AAAAAGqg8TUGHJELCvw4wg.IW6iK2Lb8ik";
 
 (async () => {
   const browser = await puppeteer.launch({
@@ -13,7 +14,11 @@ const TOKEN = "thr1.AAAAAGqg8K1i-WTPiVcgeQ.-gUFQBsy2Eg";
 
   page.on('console', msg => console.log('BOT:', msg.text()));
 
-  await page.goto('https://www.haxball.com/headless');
+  // Carga la página de Haxball
+  await page.goto('https://www.haxball.com/headless', { waitUntil: 'networkidle2' });
+
+  // Espera explícitamente a que HBInit esté disponible en la ventana
+  await page.waitForFunction(() => typeof window.HBInit === 'function');
 
   await page.evaluate((token) => {
     window.room = HBInit({
@@ -30,7 +35,7 @@ const TOKEN = "thr1.AAAAAGqg8K1i-WTPiVcgeQ.-gUFQBsy2Eg";
     room.setTimeLimit(3);
 
     room.onPlayerJoin = function(player) {
-      // Otorga admin automático al usuario que coincida con tu nick
+      // Admin automático si el nombre coincide con tu Nick
       if (player.name === "TuNombreEnElJuego") {
         room.setPlayerAdmin(player.id, true);
       }
