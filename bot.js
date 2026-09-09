@@ -1,10 +1,10 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
 
-// REEMPLAZA ESTE TOKEN POR EL TUYO CADA VEZ QUE VAYAS A ENCENDER EL HOST
-const TOKEN = "thr1.AAAAAGqg6JMW40Fvjr7VoA.8pJSQG4Yg6o";
+const TOKEN = "thr1.AAAAAGqg7MqcPOXHgJo8Dw.w5APOtVUgqY";
 
 (async () => {
   const browser = await puppeteer.launch({
+    executablePath: '/usr/bin/google-chrome',
     headless: "new",
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
@@ -22,7 +22,6 @@ const TOKEN = "thr1.AAAAAGqg6JMW40Fvjr7VoA.8pJSQG4Yg6o";
       public: true,
       token: token,
       noPlayer: true,
-      // Ubicación forzada en Venezuela (Margarita) pero hosteada desde EE. UU.
       geo: { code: "ve", lat: 10.9575, lon: -63.8697 }
     });
 
