@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 
 // REEMPLAZA ESTE TOKEN POR EL TUYO CADA VEZ QUE VAYAS A ENCENDER EL HOST
-const TOKEN = "PEGA_AQUI_TU_TOKEN_DE_HAXBALL";
+const TOKEN = "thr1.AAAAAGqg6JMW40Fvjr7VoA.8pJSQG4Yg6o";
 
 (async () => {
   const browser = await puppeteer.launch({
