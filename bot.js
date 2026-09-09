@@ -1,4 +1,4 @@
-const puppeteer = require('puppeteer-core');
+const puppeteer = require('puppeteer');
 
 // REEMPLAZA ESTE TOKEN POR EL TUYO CADA VEZ QUE VAYAS A ENCENDER EL HOST
 const TOKEN = "thr1.AAAAAGqh3kmmrP5Vjug1Kg.6QefuNal7W4";
