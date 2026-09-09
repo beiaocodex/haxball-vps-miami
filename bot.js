@@ -1,11 +1,11 @@
 const puppeteer = require('puppeteer-core');
 
-const TOKEN = "thr1.AAAAAGqg8BFSjjglFuVhlA.i04N-RfN1f4";
+const TOKEN = "thr1.AAAAAGqg8K1i-WTPiVcgeQ.-gUFQBsy2Eg";
 
 (async () => {
   const browser = await puppeteer.launch({
     executablePath: '/usr/bin/google-chrome',
-    headless: "new",
+    headless: true,
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
   
@@ -29,11 +29,14 @@ const TOKEN = "thr1.AAAAAGqg8BFSjjglFuVhlA.i04N-RfN1f4";
     room.setScoreLimit(3);
     room.setTimeLimit(3);
 
-   room.onPlayerJoin = function(player) {
-      // Reemplaza "besinhooo" por tu Nick exacto en Haxball
-      if (player.name === "besinhoooo") {
+    room.onPlayerJoin = function(player) {
+      // Otorga admin automático al usuario que coincida con tu nick
+      if (player.name === "TuNombreEnElJuego") {
         room.setPlayerAdmin(player.id, true);
       }
-
       room.sendAnnouncement("¡Bienvenido! Hosteado desde servidores EE. UU. / Miami 🇻🇪", player.id, 0x00FF00);
     };
+  }, TOKEN);
+
+  console.log("El host de Haxball está activo.");
+})();
