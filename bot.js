@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer-core');
 
 // REEMPLAZA ESTE TOKEN POR EL TUYO CADA VEZ QUE VAYAS A ENCENDER EL HOST
-const TOKEN = "thr1.AAAAAGqhqw73Rz7ZN281eA.783cQiM9hEU";
+const TOKEN = "thr1.AAAAAGqhrV0xth9rMyQ5Aw.VPV0oBq8Sq0";
 
 (async () => {
   const browser = await puppeteer.launch({
@@ -33,7 +33,8 @@ const TOKEN = "thr1.AAAAAGqhqw73Rz7ZN281eA.783cQiM9hEU";
       public: true,
       token: token,
       noPlayer: true,
-      geo: { code: "ve", lat: 11.4045, lon: -69.6734 } // Coordenadas exactas de Falcón, Venezuela
+      // Esta línea hace que la sala salga en Venezuela en la lista publica:
+      geo: { code: "ve", lat: 11.4045, lon: -69.6734 }
     });
 
     room.setDefaultStadium("Big");
@@ -44,7 +45,7 @@ const TOKEN = "thr1.AAAAAGqhqw73Rz7ZN281eA.783cQiM9hEU";
       if (player.name === "besinhoooo") {
         room.setPlayerAdmin(player.id, true);
       }
-      room.sendAnnouncement("¡Bienvenido! Hosteado con bajo ping desde Miami 🇻🇪", player.id, 0x00FF00);
+      room.sendAnnouncement("¡Bienvenido! Hosteado desde Miami, USA 🇻🇪", player.id, 0x00FF00);
     };
   }, TOKEN);
 
