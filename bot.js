@@ -29,10 +29,11 @@ const TOKEN = "thr1.AAAAAGqg7MqcPOXHgJo8Dw.w5APOtVUgqY";
     room.setScoreLimit(3);
     room.setTimeLimit(3);
 
-    room.onPlayerJoin = function(player) {
+   room.onPlayerJoin = function(player) {
+      // Reemplaza "besinhooo" por tu Nick exacto en Haxball
+      if (player.name === "besinhoooo") {
+        room.setPlayerAdmin(player.id, true);
+      }
+
       room.sendAnnouncement("¡Bienvenido! Hosteado desde servidores EE. UU. / Miami 🇻🇪", player.id, 0x00FF00);
     };
-  }, TOKEN);
-
-  console.log("El host de Haxball está activo.");
-})();
