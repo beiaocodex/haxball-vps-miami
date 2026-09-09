@@ -1,0 +1,22 @@
+name: Haxball Miami Host
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-host:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v3
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Iniciar Host de Haxball
+        run: node bot.js
