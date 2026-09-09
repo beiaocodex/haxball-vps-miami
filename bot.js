@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer-core');
 
 // REEMPLAZA ESTE TOKEN POR EL TUYO CADA VEZ QUE VAYAS A ENCENDER EL HOST
-const TOKEN = "thr1.AAAAAGqg9EmmcGXaxz6-Aw.RJCUJdkGK70";
+const TOKEN = "thr1.AAAAAGqg-soIGlonvTcKUA.rC_tulFMF4E";
 
 (async () => {
   const browser = await puppeteer.launch({
@@ -32,8 +32,7 @@ const TOKEN = "thr1.AAAAAGqg9EmmcGXaxz6-Aw.RJCUJdkGK70";
       maxPlayers: 12,
       public: true,
       token: token,
-      noPlayer: true,
-      geo: { code: "ve", lat: 10.9575, lon: -63.8697 } // Coordenadas de Isla de Margarita
+      noPlayer: true
     });
 
     room.setDefaultStadium("Big");
