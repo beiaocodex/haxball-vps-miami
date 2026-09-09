@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer-core');
 
 // REEMPLAZA ESTE TOKEN POR EL TUYO CADA VEZ QUE VAYAS A ENCENDER EL HOST
-const TOKEN = "thr1.AAAAAGqhqDsEeomeR03bUA.iRkLpAG7SOg";
+const TOKEN = "thr1.AAAAAGqhqnq4tAnEhc4K5w.TfmKYMVARuA";
 
 (async () => {
   const browser = await puppeteer.launch({
@@ -26,13 +26,13 @@ const TOKEN = "thr1.AAAAAGqhqDsEeomeR03bUA.iRkLpAG7SOg";
   // Espera a que la API de Haxball esté cargada
   await page.waitForFunction(() => typeof window.HBInit === 'function');
 
-  await page.evaluate((token) => {
-    window.room = HBInit({
+  window.room = HBInit({
       roomName: "⚽ [VE / MIAMI] Tu Sala Gratis",
       maxPlayers: 12,
       public: true,
       token: token,
-      noPlayer: true
+      noPlayer: true,
+      geo: { code: "ve", lat: 11.4045, lon: -69.6734 } // Coordenadas exactas de Falcón, Venezuela
     });
 
     room.setDefaultStadium("Big");
