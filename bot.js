@@ -1,23 +1,29 @@
 const puppeteer = require('puppeteer-core');
 
 // REEMPLAZA ESTE TOKEN POR EL TUYO CADA VEZ QUE VAYAS A ENCENDER EL HOST
-const TOKEN = "thr1.AAAAAGqg8TUGHJELCvw4wg.IW6iK2Lb8ik";
+const TOKEN = "thr1.AAAAAGqg9EmmcGXaxz6-Aw.RJCUJdkGK70";
 
 (async () => {
   const browser = await puppeteer.launch({
     executablePath: '/usr/bin/google-chrome',
     headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--ignore-certificate-errors',
+      '--use-gl=angle',
+      '--use-angle=gl-egl'
+    ]
   });
   
   const page = await browser.newPage();
 
   page.on('console', msg => console.log('BOT:', msg.text()));
 
-  // Carga la página de Haxball
+  // Carga la página de Haxball Headless
   await page.goto('https://www.haxball.com/headless', { waitUntil: 'networkidle2' });
 
-  // Espera explícitamente a que HBInit esté disponible en la ventana
+  // Espera a que la API de Haxball esté cargada
   await page.waitForFunction(() => typeof window.HBInit === 'function');
 
   await page.evaluate((token) => {
@@ -27,7 +33,7 @@ const TOKEN = "thr1.AAAAAGqg8TUGHJELCvw4wg.IW6iK2Lb8ik";
       public: true,
       token: token,
       noPlayer: true,
-      geo: { code: "ve", lat: 10.9575, lon: -63.8697 }
+      geo: { code: "ve", lat: 10.9575, lon: -63.8697 } // Coordenadas de Isla de Margarita
     });
 
     room.setDefaultStadium("Big");
@@ -35,11 +41,11 @@ const TOKEN = "thr1.AAAAAGqg8TUGHJELCvw4wg.IW6iK2Lb8ik";
     room.setTimeLimit(3);
 
     room.onPlayerJoin = function(player) {
-      // Admin automático si el nombre coincide con tu Nick
-      if (player.name === "TuNombreEnElJuego") {
+      // Reemplaza TuNickExacto con el nombre que usas para jugar
+      if (player.name === "besinhoooo") {
         room.setPlayerAdmin(player.id, true);
       }
-      room.sendAnnouncement("¡Bienvenido! Hosteado desde servidores EE. UU. / Miami 🇻🇪", player.id, 0x00FF00);
+      room.sendAnnouncement("¡Bienvenido! Hosteado con bajo ping desde Miami 🇻🇪", player.id, 0x00FF00);
     };
   }, TOKEN);
 
