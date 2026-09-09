@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer-core');
 
 // REEMPLAZA ESTE TOKEN POR EL TUYO CADA VEZ QUE VAYAS A ENCENDER EL HOST
-const TOKEN = "thr1.AAAAAGqhqnq4tAnEhc4K5w.TfmKYMVARuA";
+const TOKEN = "thr1.AAAAAGqhqw73Rz7ZN281eA.783cQiM9hEU";
 
 (async () => {
   const browser = await puppeteer.launch({
@@ -26,7 +26,8 @@ const TOKEN = "thr1.AAAAAGqhqnq4tAnEhc4K5w.TfmKYMVARuA";
   // Espera a que la API de Haxball esté cargada
   await page.waitForFunction(() => typeof window.HBInit === 'function');
 
-  window.room = HBInit({
+  await page.evaluate((token) => {
+    window.room = HBInit({
       roomName: "⚽ [VE / MIAMI] Tu Sala Gratis",
       maxPlayers: 12,
       public: true,
@@ -40,7 +41,6 @@ const TOKEN = "thr1.AAAAAGqhqnq4tAnEhc4K5w.TfmKYMVARuA";
     room.setTimeLimit(3);
 
     room.onPlayerJoin = function(player) {
-      // Reemplaza TuNickExacto con el nombre que usas para jugar
       if (player.name === "besinhoooo") {
         room.setPlayerAdmin(player.id, true);
       }
