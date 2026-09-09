@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer-core');
 
-const TOKEN = "thr1.AAAAAGqg7MqcPOXHgJo8Dw.w5APOtVUgqY";
+const TOKEN = "thr1.AAAAAGqg8BFSjjglFuVhlA.i04N-RfN1f4";
 
 (async () => {
   const browser = await puppeteer.launch({
