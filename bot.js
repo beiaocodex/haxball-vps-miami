@@ -1,16 +1,16 @@
 const puppeteer = require('puppeteer');
 
 (async () => {
-  // Iniciar navegador en segundo plano
+  // 1. Iniciar navegador
   const browser = await puppeteer.launch({
     headless: "new",
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
 
+  // 2. Crear la página
   const page = await browser.newPage();
 
-  // Imprimir logs de la consola del navegador en la consola de Node.js
-// Escuchar la consola del navegador e identificar el token/link de la sala
+  // 3. Registrar el escuchador de logs DEPUÉS de crear la página
   page.on('console', msg => {
     const text = msg.text();
     if (text.includes("TOKEN_HAXBALL:")) {
@@ -28,20 +28,12 @@ const puppeteer = require('puppeteer');
       console.log("HAXBALL LOG:", text);
     }
   });
-  // Abrir la página Headless de Haxball
+
+  // 4. Ir a la página de HaxBall
   await page.goto('https://www.haxball.com/headless', { waitUntil: 'networkidle2' });
 
-  // Inyectar y ejecutar el script dentro de la página
+  // 5. Ejecutar el script dentro de la página
   await page.evaluate(() => {
-
-    // ========================================================
-    // AQUÍ ES DONDE VA TODO TU SCRIPT (EL QUE TIENES EN EL BLOC DE NOTAS)
-    // ========================================================
-
-    // Stats, variables, etc.
-
-   // Stats: "Auth" : '["0-Games", "1-Wins", "2-Draws", "3-Losses", "4-Winrate", "5-Goals", "6-Assists", "7-GK", "8-CS", "9-CS%", "10-Role", "11-Nick"]'
-
 /* VARIABLES */
 
 /* ROOM */
