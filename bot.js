@@ -1,5 +1,8 @@
 const puppeteer = require('puppeteer');
 
+// 🔑 PEGA TU TOKEN DE HAXBALL AQUÍ ABAJO (entre las comillas)
+const HAXBALL_TOKEN = "thr1.AAAAAGqnaMZI-netwhLTog.jtrpuCg12Ck"; 
+
 (async () => {
   const browser = await puppeteer.launch({
     headless: "new",
@@ -16,16 +19,17 @@ const puppeteer = require('puppeteer');
 
   const page = await browser.newPage();
 
-  // Escuchar errores del navegador para depuración
-  page.on('console', msg => console.log('PAGE LOG:', msg.text()));
-  page.on('pageerror', err => console.log('PAGE ERROR:', err.toString()));
+  // Imprimir los logs de la consola dentro de la pestaña de GitHub Actions
+  page.on('console', msg => console.log('BOT LOG:', msg.text()));
+  page.on('pageerror', err => console.log('BOT ERROR:', err.toString()));
 
   await page.goto('https://html5.haxball.com/headless', { waitUntil: 'networkidle2' });
 
-  // Esperar a que la función HBInit esté disponible en la página
+  // Esperar a que la API de HaxBall cargue completamente
   await page.waitForFunction(() => typeof window.HBInit === 'function');
 
-  await page.evaluate(() => {
+  // Inyectar el token y la configuración dentro de la página
+  await page.evaluate((token) => {
     const roomName = "🌙 [ 𝗡𝗢𝗖𝗧𝗜𝗚𝗢𝗟 ] 🌙 x5 Venezuela";
     const botName = "Nocti bot";
     const maxPlayers = 30;
@@ -37,8 +41,16 @@ const puppeteer = require('puppeteer');
         maxPlayers: maxPlayers, 
         public: roomPublic, 
         playerName: botName, 
-        geo: geo[0] 
+        geo: geo[0],
+        token: token // Token aplicado aquí
     });
+
+    // Mostrar el enlace de la sala en los logs de GitHub cuando se cree
+    window.room.onRoomLink = function(link) {
+        console.log("==========================================");
+        console.log("🔗 ENLACE DE LA SALA:", link);
+        console.log("==========================================");
+    };
 
     const adminPassword = "noctiadmin";
     const scoreLimitFutsal = 3;
@@ -161,7 +173,7 @@ const puppeteer = require('puppeteer');
             room.sendChat(`⚽ ¡GOL! ${randFrase} ${player.name}!`);
         }
     };
-  });
+  }, HAXBALL_TOKEN);
 
-  console.log("Host de Haxball iniciado exitosamente.");
+  console.log("Host de Haxball iniciado con token exitosamente.");
 })();
