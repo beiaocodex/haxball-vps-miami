@@ -10,8 +10,24 @@ const puppeteer = require('puppeteer');
   const page = await browser.newPage();
 
   // Imprimir logs de la consola del navegador en la consola de Node.js
-  page.on('console', msg => console.log('HAXBALL LOG:', msg.text()));
-
+// Escuchar la consola del navegador e identificar el token/link de la sala
+  page.on('console', msg => {
+    const text = msg.text();
+    if (text.includes("TOKEN_HAXBALL:")) {
+      const token = text.split("TOKEN_HAXBALL:")[1].trim();
+      console.log("\n==========================================");
+      console.log("ABRE ESTE LINK PARA ACTIVAR LA SALA:");
+      console.log(`https://www.haxball.com/headlesstoken?token=${token}`);
+      console.log("==========================================\n");
+    } else if (text.includes("LINK_SALA:")) {
+      console.log("\n==========================================");
+      console.log("SALA PUBLICADA EN VENEZUELA CON ÉXITO:");
+      console.log(text.split("LINK_SALA:")[1].trim());
+      console.log("==========================================\n");
+    } else {
+      console.log("HAXBALL LOG:", text);
+    }
+  });
   // Abrir la página Headless de Haxball
   await page.goto('https://www.haxball.com/headless', { waitUntil: 'networkidle2' });
 
@@ -37,19 +53,12 @@ const roomPublic = true;
 const geo = [{ code: "VE", lat: 10.4806, lon: -66.8983 }]; // Geo
 
 const room = HBInit({ roomName: roomName, maxPlayers: maxPlayers, public: roomPublic, playerName: botName, geo: geo[0] });
-
 room.onHaxballToken = function(token) {
-  console.log("==========================================");
-  console.log("LINK DE RECAPTCHA DE HAXBALL:");
-  console.log("https://www.haxball.com/headlesstoken?token=" + token);
-  console.log("==========================================");
+  console.log("TOKEN_HAXBALL:" + token);
 };
 
 room.onRoomLink = function(link) {
-  console.log("==========================================");
-  console.log("SALA CREADA CON ÉXITO:");
-  console.log(link);
-  console.log("==========================================");
+  console.log("LINK_SALA:" + link);
 };
 const adminPassword = "noctiadmin";
 
