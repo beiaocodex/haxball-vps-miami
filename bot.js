@@ -24,31 +24,6 @@ const puppeteer = require('puppeteer');
 
     // Stats, variables, etc.
 
-    const roomName = "🌙 [ NOCTIGOL ] 🌙 x5 Venezuela";
-    const botName = "Nocti bot";
-    const maxPlayers = 30;
-    const roomPublic = true;
-    const geo = [{ code: "VE", lat: 10.4806, lon: -66.8983 }];
-
-    const room = HBInit({ 
-      roomName: roomName, 
-      maxPlayers: maxPlayers, 
-      public: roomPublic, 
-      playerName: botName, 
-      geo: geo[0] 
-    });
-
-    const adminPassword = "noctiadmin";
-    const vipPassword = "noctivip";
-
-    const playersToSetVIP = 28;
-    const playersToSetPublic = 27;
-
-    const scoreLimitPractice = 0;
-    const timeLimitPractice = 0;
-
-    const scoreLimitx3 = 3;
-
    // Stats: "Auth" : '["0-Games", "1-Wins", "2-Draws", "3-Losses", "4-Winrate", "5-Goals", "6-Assists", "7-GK", "8-CS", "9-CS%", "10-Role", "11-Nick"]'
 
 /* VARIABLES */
