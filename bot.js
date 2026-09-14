@@ -3,14 +3,29 @@ const puppeteer = require('puppeteer');
 (async () => {
   const browser = await puppeteer.launch({
     headless: "new",
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-accelerated-2d-canvas',
+      '--no-first-run',
+      '--no-zygote',
+      '--disable-gpu'
+    ]
   });
 
   const page = await browser.newPage();
-  await page.goto('https://html5.haxball.com/headless');
+
+  // Escuchar errores del navegador para depuración
+  page.on('console', msg => console.log('PAGE LOG:', msg.text()));
+  page.on('pageerror', err => console.log('PAGE ERROR:', err.toString()));
+
+  await page.goto('https://html5.haxball.com/headless', { waitUntil: 'networkidle2' });
+
+  // Esperar a que la función HBInit esté disponible en la página
+  await page.waitForFunction(() => typeof window.HBInit === 'function');
 
   await page.evaluate(() => {
-    // Código del bot de HaxBall
     const roomName = "🌙 [ 𝗡𝗢𝗖𝗧𝗜𝗚𝗢𝗟 ] 🌙 x5 Venezuela";
     const botName = "Nocti bot";
     const maxPlayers = 30;
