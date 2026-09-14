@@ -38,6 +38,19 @@ const geo = [{ code: "VE", lat: 10.4806, lon: -66.8983 }]; // Geo
 
 const room = HBInit({ roomName: roomName, maxPlayers: maxPlayers, public: roomPublic, playerName: botName, geo: geo[0] });
 
+room.onHaxballToken = function(token) {
+  console.log("==========================================");
+  console.log("LINK DE RECAPTCHA DE HAXBALL:");
+  console.log("https://www.haxball.com/headlesstoken?token=" + token);
+  console.log("==========================================");
+};
+
+room.onRoomLink = function(link) {
+  console.log("==========================================");
+  console.log("SALA CREADA CON ÉXITO:");
+  console.log(link);
+  console.log("==========================================");
+};
 const adminPassword = "noctiadmin";
 
 const vipPassword = "noctivip";
